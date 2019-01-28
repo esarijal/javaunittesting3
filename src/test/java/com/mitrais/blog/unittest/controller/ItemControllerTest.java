@@ -41,13 +41,9 @@ public class ItemControllerTest {
                 new Item(3, "Ball 3", 100, 30)
         ));
 
-        // ACTION
-        // call GET /items will return application/json and JSON Array
-        RequestBuilder request = MockMvcRequestBuilders
-                .get("/items");  // GET /items
-
         // ACTION AND ASSERTION AT ONCE
-         mockMvc.perform(request)
+         mockMvc.perform(
+                 MockMvcRequestBuilders.get("/items")) // GET /items as the request
                  .andExpect(status().isOk())                    // status expectation
                  .andExpect(content().json("[{}, {}, {}]"));   // content expectation as JSON
     }
@@ -57,13 +53,9 @@ public class ItemControllerTest {
         // PREPARATION
         when(itemService.findAllItems()).thenReturn(Collections.emptyList());
 
-        // ACTION
-        // call GET /items will return application/json and JSON Array
-        RequestBuilder request = MockMvcRequestBuilders
-                .get("/items");  // GET /items
-
         // ACTION AND ASSERTION AT ONCE
-        mockMvc.perform(request)
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/items")) // GET /items as the request
                 .andExpect(status().isOk())                    // status expectation
                 .andExpect(content().json("[]"));   // content expectation as JSON
     }
